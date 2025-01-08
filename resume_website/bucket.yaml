@@ -1,12 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Resources:
-    MyS3Bucket:
-          Type: AWS::S3::Bucket
-              Properties:
-                      BucketName: adepitan-adetunji-resume
-                            PublicAccessBlockConfiguration:
-                                      BlockPublicAcls: true
-                                              BlockPublicPolicy: true
-                                                      IgnorePublicAcls: true
-                                                              RestrictPublicBuckets: true
-                                                                  DeletionPolicy: Retain
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: adepitan-adetunji-resume
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+    DeletionPolicy: Retain
