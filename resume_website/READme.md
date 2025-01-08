@@ -1,1 +1,1 @@
-A folder that documents my resume website building processes
+deb [arch= signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main
