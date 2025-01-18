@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Static website cafe"
+Resources:
+    S3Bucket:
+        Type: AWS::S3::Bucket
+        DeletionPolicy: Retain
+        Properties:
+            WebsiteConfiguration:
+                IndexDocument: index.html
+                ErrorDocument: error.html
+                
+Outputs:
+    WebsiteURL:
+        Description: "website for the static cafe business"
+        Value: !GetAtt
+          - S3Bucket
+          - WebsiteURL
