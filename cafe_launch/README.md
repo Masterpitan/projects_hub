@@ -1,9 +1,9 @@
-LAUNCHING A CAFE WEBSITE WITH CLOUDFORMATION
+##LAUNCHING A CAFE WEBSITE WITH CLOUDFORMATION
 A cafe business has adopted production and deployment using cloudformation to create multiple region deployments with similar configurations. Thus, this challenge lab tasks me to use cloudformation and the AWS CLI to do the following:
-Deploy a virtual private cloud (VPC) networking layer by using a CloudFormation template.
-Deploy an application layer by using a CloudFormation template.
-Use Git to invoke CodePipeline and to create or update stacks from templates that are stored in CodeCommit.
-Duplicate network and application resources to another AWS Region by using CloudFormation.  
+-[]Deploy a virtual private cloud (VPC) networking layer by using a CloudFormation template.
+-[]Deploy an application layer by using a CloudFormation template.
+-[]Use Git to invoke CodePipeline and to create or update stacks from templates that are stored in CodeCommit.
+-[]Duplicate network and application resources to another AWS Region by using CloudFormation.  
 Static web contents were first hosted in Amazon S3, the cloudformation code used is provided in this repository and file named as “s3.yaml”. 
 After writing the code for bucket creation, I uploaded the stack which created the bucket in the Cloud IDE using:
 aws cloudformation create-stack –stack-name CreateBucket –template-body file://s3.yaml
