@@ -9,12 +9,15 @@ A cafe business has adopted production and deployment using cloudformation to cr
 Static web contents were first hosted in Amazon S3, the cloudformation code used is provided in this repository and file named as “s3.yaml”. 
 
 After writing the code for bucket creation, I uploaded the stack which created the bucket in the Cloud IDE using:
+
     >aws cloudformation create-stack –stack-name CreateBucket –template-body file://s3.yaml
 
 The code above created a stack which creates an s3 bucket in my AWS Management console. The web application code which have been provided for the static website alongside the static web contents (images) was then uploaded in a zip format to my cloud IDE using the command below:
+
     >wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-200-ACACAD-3-113230/15-lab-mod11-challenge-CFn/s3/static-website.zip
 
 To unzip into a folder named “static”, I used the code:
+
     >unzip static-website.zip -d static
 
 The unzipped contents were then uploaded to the s3 bucket created earlier using the codes and the processes below:
@@ -28,8 +31,11 @@ aws s3 cp --recursive . s3://createbucket-s3bucket-pvv8fegfuhbp/ --acl public-re
 The stack is now updated to enable static website hosting, I configured the website urls and wrote additional lines of code updated in my file “s3.yaml”
 
 Next, I wrote the scripts in CLI:
+
     >cd ../
+
     >aws cloudformation validate-template --template-body file://S3.yaml
+
     >aws cloudformation update-stack --stack-name CreateBucket --template-body file://S3.yaml
 
 The scripts validated and updated the stack respectively, at the outputs section of the stack, the website link was there hosting my static website.
@@ -49,7 +55,9 @@ The first template contained seven resources:
 7. Public Route Table Association
 
 In cloning the repo, I copied the HTPPS code and inserted into the CLI:
+
     >Git clone <htpps code>
+
 I navigated into the repo directory using:
 Cd <repo directory>
 I updated changes using the GitHub code actions to the template folder:
