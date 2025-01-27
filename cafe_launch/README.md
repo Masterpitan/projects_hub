@@ -10,11 +10,11 @@ Static web contents were first hosted in Amazon S3, the cloudformation code used
 
 After writing the code for bucket creation, I uploaded the stack which created the bucket in the Cloud IDE using:
 
-    >aws cloudformation create-stack –stack-name CreateBucket –template-body file://s3.yaml
+    >   aws cloudformation create-stack –stack-name CreateBucket –template-body file://s3.yaml
 
 The code above created a stack which creates an s3 bucket in my AWS Management console. The web application code which have been provided for the static website alongside the static web contents (images) was then uploaded in a zip format to my cloud IDE using the command below:
 
-    >wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-200-ACACAD-3-113230/15-lab-mod11-challenge-CFn/s3/static-website.zip
+    >   wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-200-ACACAD-3-113230/15-lab-mod11-challenge-CFn/s3/static-website.zip
 
 To unzip into a folder named “static”, I used the code:
 

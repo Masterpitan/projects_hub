@@ -3,7 +3,7 @@ Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: adepitan-adetunji-resume
+      BucketName: adepitan-adetunji-resume-bucket
       PublicAccessBlockConfiguration:
         BlockPublicAcls: true
         BlockPublicPolicy: true
