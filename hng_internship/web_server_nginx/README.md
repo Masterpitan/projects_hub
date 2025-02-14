@@ -32,7 +32,7 @@ As simple as it sounds, I spent days on this task mainly because my Ubuntu refus
 
 The address of the website was imputed using:
 
-    http://(ec-2 IP Address)
+    http://54.145.139.69
 
 The website was open and functional.
 
