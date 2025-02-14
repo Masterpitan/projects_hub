@@ -1,0 +1,1 @@
+This folder captures my experience and projects built while engaging in active internship with the HNG team. Each project is captured in a folder and a README file is attached to capture the process of the project execution, challenges and how I overcame them.
