@@ -10,7 +10,40 @@ Thereafter, I set the environment up and installed the configured files using th
 
     . ./setup.sh
 
+###
 CASE SCENARIO
+
+You have the Birds web application, which was built by using a NodeJs server running on an AWS Cloud9 instance and an Amazon Simple Storage Service (Amazon S3) bucket with static website hosting capability. The Birds application tracks students' bird sightings by using the following components:
+
+1. A home page
+
+2. An educational page that teaches students about birds
+
+3. The following three protected pages, which students can access only if they have been authenticated:
+
+4. A sightings page where students can view past bird sightings
+
+5. A reporting page where students report new bird sightings
+
+6. An administrator page where site administrators can perform additional operations
+
+7. You need to add authentication and authorization to the application for the protected pages.
+
+Step	Explanation
+1	The user requests access to the administrator page from the browser.
+2	The request is routed to the NodeJs application server that is hosting the Birds application.
+3	The application redirects the request to the Amazon Cognito managed UI.
+4a	The user is authenticated by the Amazon Cognito user pool, and the access token is returned to the application.
+4b	The Amazon Cognito SDK also stores the access token in browser's local storage for subsequent use, with the default expiration of 3,600 seconds.
+5	The application validates the token and returns the administrator page as requested.
+6	The page is returned to the user's browser through the Cloudfront distribution.
+7	The user initiates a query to a DynamoDb table.
+8	The application sends the token to the Amazon Cognito identity pool and receives temporary AWS credentials upon validation.
+9	The application uses the received credentials to query the DynamoDB table and return data to the protected page. The page is returned to the user's browser through the Cloudfront distribution.
+
+The diagram illustration of the task is presented below:
+
+![Lab-01](images/Lab-01.png)
 
 After my files have been installed, I updated the unzipped codes to point my web application code to the node server's API endpoint. This was done by replacing a placeholder with the cloudfront domain.
 
@@ -21,7 +54,6 @@ aws s3 cp website s3://<s3-bucket>/ --recursive --cache-control "max- age=0"
 The web application uses a nodejs server, so I had to navigate to the node server directory and start the node server using:
 npm start
 
-(INCLUDE WEBSITE PICTURE HERE)
 
 Here, the sightings, reports, siteadmin pages are not accessible because the Cognito access has not been configured. The next steps provide details on the process of configuring them
 
