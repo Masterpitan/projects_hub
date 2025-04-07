@@ -54,3 +54,40 @@ This deploys our cloudfront distribution using the cloudfront domain derived ear
 ![main-page](images/main-page.PNG)
 
 ### TASK TWO: Creating a DynamoDB table
+
+To store and dynamically manage student bird sighting data, we create a new DynamoDB table.
+
+Initially, we will create this table with only two attributes. Every DynamoDB table requires a primary key. For this table, we will configure a composite primary key, which means it will have a partition key and a sort key.
+
+The first attribute that we will define in the table is id, which will be the table's partition key. The second attribute will be student_name_str, which will be the sort key.
+
+We navigate to DynamoDB through the AWS Console
+
+We click on "create table", table name is "BirdSightings"; partition key is "id" with string format selected
+sort key is "student_name_str" with string format also selected. These values are kept in the notepad variables stored earlier.
+
+### Task 3: Adding multiple records to the table by using a batch script
+
+In this task, we use a batch script to load multiple data into the table. we use a batch script because its efficient and faster than using manual entry which can also generate errors. Hnece, we write a script that reads through multiple entries and loads them into the table while also formatting them
+
+We edit the javascript file that contains the script by replacing the dynamodb placeholder with the dynamoDB table name "BirdSightings". The name of the file is "load_past_sightings.js"
+
+After saving the file, we open another terminal while the first terminal is still running, we then run the loas_past_sightins.js by running:
+
+    node load_past_sightings.js
+
+It loads the sightings and displays an image just like it's shown below:
+![load-table](images/load-table.PNG)
+
+Upon loading the records of the past sightings, we navigate back to our AWS Console and click on the table created. We click on "explore table items" and select the "scan" feature. It displays our recently loaded items which we did from the IDE, a picture of it is shown below:
+![table-scan](images/table-scan.PNG)
+
+However, when we created our table using the console, we setup only two attributes, our records loaded into the table from the IDE returned seven attributes. This is possible because DynamoDB is expandable and can include more attributes unlike the SQL which must tally with the schema set. DynamoDB is NoSQL, hence, the difference in attribute cannot fail its loadings.
+
+### Task 4: Retrieving data programmatically by using the scan method
+
+In the Amazon Cognito lab, the Birds website returned a list of past bird sightings by reading them from a static file. In this task, you will update the website code to show dynamic data from your BirdSightings table. This way, when students add more records in the future, the new records will automatically display on the Sightings page in the application.
+
+The AWS SDK offers multiple methods to retrieve data from a DynamoDB table. One method is the scan operation. A scan operation reads every record in a table or a secondary index. If you want to retrieve every record, this is the best method to use.
+
+In this task, you will update the website code to scan records from your DynamoDB table.
