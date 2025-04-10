@@ -91,3 +91,98 @@ In the Amazon Cognito lab, the Birds website returned a list of past bird sighti
 The AWS SDK offers multiple methods to retrieve data from a DynamoDB table. One method is the scan operation. A scan operation reads every record in a table or a secondary index. If you want to retrieve every record, this is the best method to use.
 
 In this task, you will update the website code to scan records from your DynamoDB table.
+
+The db_scan.js file was used to perform this function. We updated the code to include the BirdSightings table so as to scan records from the DynamoDB table. The db_scan.js file is also in this folder
+
+Using the following commands below, the website codes are updated to take upon the new changes:
+
+    cd /home/ec2-user/environment/website
+    cp index_db_scan.html index.html
+    cp scripts/templates_sightings_from_db.js scripts/templates.js
+
+The website codes also needed to be updated in the AWS S3 bucket, a Python code was already written to that effect. So we navigate back to the /resources folder and run the python code using the following codes:
+
+    cd /home/ec2-user/environment/resources
+    python upload_website_code.py
+
+After the update, the update website now looks like this as against the first one:
+![updated-web-page](images/updated-web-page.PNG)
+
+The sightings page is being tested and the image below shows all the sightings recorded after students are able to log in:
+![whole-sighting-page](images/whole-sighting-page.PNG)
+
+However, the request is to allow students only access their own sightings and not the whole sightings, requiring a new task.
+
+Therefore, the filter expression in the db_scan_filter.js file is edited to include the attribute name which we set earlier while setting up our DynamoDB table.
+
+After the code update, we also update the website code to reflect the new filter feature as done earlier using the codes:
+
+    cp index_db_scan_filter.html index.html
+
+We also update te AWS S3 bucket using the code:
+
+    python upload_website_code.py
+
+We test the new feature by refreshing the website and loading the sightings page again using the teststudent login details used earlier. This is how it loads now bringing only sightings by the testdtudent and not all the sightings of students:
+![test-student-sighting](images/test-student-sighting.PNG)
+
+### Task 5: Adding a single record to the table by using the put method
+This task updates the bird application so students can add records through the report page
+
+We navigate back to the website/scripts folder locating the template_with_add_sightings.js file and editing the following parameter placeholders to include the parameters saved at the creation of the DynamoDB table:
+
+    - Table Name
+    - partition key
+    - sort key
+
+We update the website code by copying the new files to the files and also updating the codes in the S3 Bucket by running the python code
+
+We test the updated feature by selecting the report page which now looks like this:
+![report-page](images/report-page.PNG)
+
+We include some new sightings of birds and go back to the sightings page to check for the new update. the new sightings are updated on the teststudent page as shown below too:
+![new-sighting-page](images/new-sighting-page.PNG)
+
+### Task 6: Adding a GSI to the table
+Just like we edited the code to filter the table to include only sightings by each student and not all sightings at once, this task charges us to filter the code such that only selected grades can be viewed at a time. Hence, we edit the code to include Grade three students alone since all grades have access to update sightings.
+
+Before we do this, we need to add records from other grades to effectively test our new feature.
+
+We do this by running the load_past_sightings_2.js file using the code:
+
+    node load_past_sightings_2.js
+
+This loads additional records to the table
+
+After loading additional records, we now create a GSI. The following steps achieve this:
+
+1. We return to the AWS console and click on our DynamoDB BirdSightings Table
+2. Click on "actions" and select "create index"
+3. We use the following details to create:
+    - partition key: class_level_str; data type is string
+    - sort key: date_int; data type is number
+    - index name: class-date-index
+    We click on "create index"
+4. The index name, partition and sort key are recorded in a text editor for future reference
+
+### Task 7: Using a GSI in a DynamoDB query operation
+The importance of query operation allows us to search specific data from the database rather than scanning all the items. This saves more time, limits the number of reads and saves cost.
+
+We open the ddb_query.js file to update the placeholders for:
+
+    <index_name>
+    <partition_key>
+    <sort_key>
+
+They are replaced with the codes saved earlier. Then we save our file and run the query to test the new feature by using:
+
+    node ddb_query.js
+
+# NOTE: The code above can only be ran after the GSI status shows "active" in the AWS DynamoDB console
+
+The query response is shown below after reading the data queried:
+![query](images/query.PNG)
+
+The output confirms that our query feature now works perfectly which marks the end of this lab.
+
+# END OF LAB
