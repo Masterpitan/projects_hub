@@ -1,0 +1,16 @@
+{
+  "Comment": "A description of my state machine",
+  "StartAt": "SNS Publish",
+  "States": {
+    "SNS Publish": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "Message.$": "$.presigned_url_str",
+        "TopicArn": "arn:aws:sns:us-east-1:706812861348:EmailReport"
+      },
+      "End": true
+    }
+  },
+  "QueryLanguage": "JSONPath"
+}
