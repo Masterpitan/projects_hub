@@ -194,3 +194,57 @@ We click on "execute" and check our email for a new url link received. When we o
 ![report-page](images/report-page.PNG)
 
 ### Task 6: Adding the getRealData Lambda function to the State Machine
+In Lab 2: Adding Dynamic Data to Your Application with DynamoDB, we updated the application to use DynamoDB to store the bird sighting records. In this task, we test a Lambda function that retrieves records from that DynamoDB table. You then add this function to your state machine so that your generateHTML state uses real database date instead of the mock data that you tested with earlier.
+
+1. We first test the code in the Lambda console
+2. We click on code then click on "test"
+3. We click on "create test event" then name it "test3"
+4. We save and click on "test" again. it generates a link for us that when clicked on, takes us to the DynamoDB records.
+### Adding the getRealData function to our workflow
+Now, we add it to our workflow
+
+1. In the stepFunction design page, we drag an AWS Lambda Invoke object onto the canvas above the Parallel state Process Report object
+2. In the Lambda Invoke pane, we configure the following options:
+
+    - State name: getRealData
+
+    - Function name: We select getRealData:$LATEST.
+
+    - Payload: We choose No payload.
+
+3. We save our work.
+4. We update the SNS Publish object details in the ASL code to format the message text.
+The essence of instruction four is to improve the reading format so it does not become complicated to read.
+
+    - We click on the code section
+
+    - We locate our "Message.$" section and replace "$" with:
+
+        "States.Format('The report has completed successfully! Here is your secure URL:\n\n{}', $[1].presigned_url_str)"
+
+    - We save and click on "execute" to test our workflow
+
+    - We leave the json path blank and click on "execute"
+We get a mail that contains a link, the link takes us to the dynamoDB records page as shown below:
+![dynamoDB-records](images/DynamoDB-records.PNG)
+
+Our entire workflow is captured in the image below:
+![entire-workflow](images/entire-workflow.PNG)
+
+### Updating code to call StateMachine
+1. We update the mw.js file already provided in our IDE by inserting AWS_ID in a placeholder provided
+2. Our updated code looks similar to this:
+
+      stateMachineArn: 'arn:aws:states:us-east-1:1234567890:stateMachine:MyStateMachine',
+
+Now, it has been integrated with the states machine.
+3. We navigate to our node_server folder and run:
+
+      npm start
+
+4. Once our node server is running, we input our cloudfront domain in a new window which loads the bird app page
+5. We navigate to sightings page and log in with the details provided, when prompted, we also change password.
+6. We select "sightings by students" and also click on "run report"
+7. The report link is sent to our email which we can click on to access the reports.
+
+# END OF LAB
