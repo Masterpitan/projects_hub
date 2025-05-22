@@ -1,10 +1,10 @@
 Configuring a Web Server Using Nginx
 
-1.  In order to accomplish this task, a DevOps task, I first installed Ubuntu from my Windows Power Shell. After Ubuntu was installed, I ran the command: 
+1.  This DevOps task challenges me to serve a webpage using NGINX and host this page on EC2 instance using AWS. I configured NGINX on Ubuntu, however, update and upgrade are required before proceeding to running NGINX, hencem I ran:
 
     sudo apt update
 
-    sudo apt upgrade 
+    sudo apt upgrade
 
 2.  Afterwards, I also installed nginx and ran it.
 
@@ -12,28 +12,24 @@ Configuring a Web Server Using Nginx
 
 4.  The next step now involved restarting my nginx and testing the code with the address http//:localhost which loaded the page with my html code.
 
-Challenges Encountered
+5.  After my NGINX was configured and running successfully, it was time to host it on AWS Cloud. Thus, I navigated to my AWS management console, created an ec-2 instance using the t2.micro instance size in order to save costs,. Ubuntu was selected as the OS type while I created a key pair so I could connect using ssh. I also configured the security group to take ssh connection on ssh port 22 from my computer and also http port 80 from anywhere IPV4. This enables only me to remotely log into my ec2 instance using the ssh key.
 
-As simple as it sounds, I spent days on this task mainly because my Ubuntu refused to update and install nginx. I had to do more research which made me realise that I was using an outdated version of Ubuntu
-
-5.  I installed a new version through the PowerShell and all necessary upgrades were made. However, nginx still refused to start even after installing. I consulted YouTube again but all to no avail. I consulted GPT which made me realise that my laptop does not support the “systemctl” command used in running nginx. So I used “service” command.
-
-6.  After my NGINX was configured and running successfully, it was time to host it on AWS Cloud. Thus, I navigated to my AWS management console, created an ec-2 instance using the t2.micro instance size in order to save costs,. Ubuntu was selected as the OS type while I created a key pair so I could connect using ssh. I also configured the security group to take ssh connection on ssh port 22 from my computer and also http port 80 from anywhere IPV4. This enables only me to access ssh and internet users to access the website respectively.
-
-7.  I then navigated back to my Ubuntu terminal, because I was using it from the WSL, I could not access my files directly, so I had to input the code below:
+6.  I then navigated back to my Ubuntu terminal, because I was using it from the WSL, I could not access my files directly, so I had to input the code below:
 
     cd /mnt/c/Users/Your-Windows-Username/
 
-8.  After accessing the files, I had to change the mode in order to restrict access to the key pair. I also  used the name of the key-pair downloaded and the instance public IP copied to connect using the codes below:
+7.  After accessing the files, I had to change the mode in order to restrict access to the key pair. I also  used the name of the key-pair downloaded and the instance public IP copied to connect using the codes below:
 
     chmod 400 ~/your-key.pem
 
     ssh -i ~/your-key.pem ubuntu@your-public-ip
 
-The address of the website was imputed using:
+The website page was ready and loading. A picture of the webpage is provided below, the address is also attached and can be viewed until when the ec2 instance is terminated.
+
+![webpage](images/webpage.PNG)
+
+If the website is not accessible, it means the ec2 instance has been terminated for cost purposes.
 
     http://54.145.139.69
 
 The website was open and functional.
-
-
