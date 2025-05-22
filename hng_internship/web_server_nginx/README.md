@@ -28,8 +28,8 @@ The website page was ready and loading. A picture of the webpage is provided bel
 
 ![webpage](images/webpage.PNG)
 
-If the website is not accessible, it means the ec2 instance has been terminated for cost purposes.
+If the website is not accessible, it means the ec2 instance has been terminated for cost purposes. The link below:
 
     http://54.145.139.69
 
-The website was open and functional.
+Copy and paste link in your browser window to view webpage
